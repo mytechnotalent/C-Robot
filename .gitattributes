@@ -1,0 +1,7 @@
+# Ignore CMake files for language statistics
+CMakeLists.txt linguist-vendored
+*.cmake linguist-vendored
+
+# Force the repository to be detected as C
+*.c linguist-language=C
+*.h linguist-language=C
