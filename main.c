@@ -30,8 +30,18 @@
 #include <stdio.h>
 #include "pico/stdlib.h"
 #include "robot.h"
+#include "ir.h"
+
+static void init(void);
+static void loop(void);
 
 int main() {
+    init();
+    loop();
+    return 0;
+}
+
+static void init(void) {
     // Initialize standard I/O for printf debugging
     stdio_init_all();
 
@@ -53,7 +63,9 @@ int main() {
     gpio_init(IR_PIN); 
     gpio_set_dir(IR_PIN, GPIO_IN);
     gpio_pull_up(IR_PIN);
+}
 
+static void loop(void) {
     // Default speed at ~50% duty cycle
     uint16_t speed = 32768;
     
@@ -69,51 +81,8 @@ int main() {
             // Valid key received, reset timeout counter
             n = 0;
             
-            // Process IR remote commands
-            switch (key) {
-                case 0x18: // Forward command
-                    motor_forward(speed);
-                    printf("forward\n");
-                    break;
-                    
-                case 0x08: // Left command
-                    motor_left(13107); // ~20% duty for turning
-                    printf("left\n");
-                    break;
-                    
-                case 0x1C: // Stop command
-                    motor_stop();
-                    printf("stop\n");
-                    break;
-                    
-                case 0x5A: // Right command
-                    motor_right(13107); // ~20% duty for turning
-                    printf("right\n");
-                    break;
-                    
-                case 0x52: // Backward command
-                    motor_backward(speed);
-                    printf("backward\n");
-                    break;
-                    
-                case 0x09: // Reset speed to default
-                    speed = 32768;
-                    printf("speed: %d\n", speed);
-                    break;
-                    
-                case 0x15: // Increase speed by ~10%
-                    if (speed + 6553 < 65536) speed += 6553;
-                    printf("speed: %d\n", speed);
-                    break;
-                    
-                case 0x07: // Decrease speed by ~10%
-                    if (speed > 6553) speed -= 6553;
-                    printf("speed: %d\n", speed);
-                    break;
-                    
-                default: // Unknown command
-                    printf("unknown key: 0x%02X\n", key);
-            }
+            // Process IR remote command
+            process_ir_command(key, &speed);
         } else {
             // No valid key received, increment timeout counter
             n++;
@@ -128,6 +97,4 @@ int main() {
             sleep_ms(1);
         }
     }
-    
-    return 0;
 }

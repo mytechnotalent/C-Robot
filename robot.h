@@ -41,9 +41,6 @@
 #define BIN2   20
 #define PWMB   21
 
-// IR Receiver Pin
-#define IR_PIN 5
-
 /**
  * @brief Set up PWM on a given pin with a specified duty cycle.
  *
@@ -87,27 +84,5 @@ void motor_left(uint16_t speed);
  * @param speed  The PWM duty cycle (0-65535) for both motors.
  */
 void motor_right(uint16_t speed);
-
-/**
- * @brief Wait for a GPIO pin to reach a specified logic level or timeout.
- *
- * Blocks until the given GPIO pin reads the desired logic level or the timeout (in microseconds) expires.
- *
- * @param gpio      The GPIO pin number to monitor.
- * @param level     The logic level to wait for (0 or 1).
- * @param timeout_us Timeout in microseconds.
- * @return int64_t  Elapsed time in microseconds, or -1 if timeout occurred.
- */
-int64_t wait_for_level(unsigned int gpio, bool level, uint32_t timeout_us);
-
-/**
- * @brief Decode a single NEC IR command from the IR receiver (blocking).
- *
- * Waits for a valid NEC IR command and decodes the 32-bit frame.
- * Returns the command byte (data2) if successful, or -1 on failure.
- *
- * @return int  The decoded command byte, or -1 if decoding failed.
- */
-int ir_getkey(void);
 
 #endif // ROBOT_H

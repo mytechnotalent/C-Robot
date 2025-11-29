@@ -1,9 +1,9 @@
-set(CMAKE_HOST_SYSTEM "Darwin-25.0.0")
-set(CMAKE_HOST_SYSTEM_NAME "Darwin")
-set(CMAKE_HOST_SYSTEM_VERSION "25.0.0")
-set(CMAKE_HOST_SYSTEM_PROCESSOR "arm64")
+set(CMAKE_HOST_SYSTEM "Windows-10.0.26200")
+set(CMAKE_HOST_SYSTEM_NAME "Windows")
+set(CMAKE_HOST_SYSTEM_VERSION "10.0.26200")
+set(CMAKE_HOST_SYSTEM_PROCESSOR "AMD64")
 
-include("/Users/kevinthomas/.pico-sdk/sdk/2.2.0/cmake/preload/toolchains/pico_arm_cortex_m33_gcc.cmake")
+include("C:/Users/assem.KEVINTHOMAS/.pico-sdk/sdk/2.2.0/cmake/preload/toolchains/pico_arm_cortex_m33_gcc.cmake")
 
 set(CMAKE_SYSTEM "PICO")
 set(CMAKE_SYSTEM_NAME "PICO")

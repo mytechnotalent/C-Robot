@@ -45,7 +45,7 @@ set(CMAKE_ASM_COMPILER ${USERHOME}/.pico-sdk/toolchain/14_2_Rel1/bin/arm-none-ea
 
 # Add executable. Default name is the project name, version 0.1
 
-add_executable(c-robot main.c robot.c)
+add_executable(c-robot main.c robot.c ir.c)
 
 pico_set_program_name(c-robot "c-robot")
 pico_set_program_version(c-robot "0.1")
